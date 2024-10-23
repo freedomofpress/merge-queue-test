@@ -1,0 +1,17 @@
+name: Check branch is rebased
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  check-rebased:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v4
+        - name: check rebased
+          run: |
+            git fetch origin
+            git checkout main
+            git merge ${{ GITHUB_HEAD_REF }} --ff-only
