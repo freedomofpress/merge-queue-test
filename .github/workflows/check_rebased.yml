@@ -14,4 +14,4 @@ jobs:
           run: |
             git fetch origin
             git checkout main
-            git merge ${{ GITHUB_HEAD_REF }} --ff-only
+            git merge origin/${{ github.head_ref }} --ff-only
