@@ -5,10 +5,6 @@ on:
 jobs:
   prevent-fixup-commits:
       runs-on: ubuntu-latest
-      env:
-        target: debian-bookworm
-        distro: debian
-        version: bookworm
       steps:
         - name: Checkout
           uses: actions/checkout@v4
