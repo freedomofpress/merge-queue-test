@@ -1,6 +1,8 @@
 name: Check branch conformity
 on:
   push:
+  pull_request:
+  merge_group:
 
 jobs:
   prevent-fixup-commits:
