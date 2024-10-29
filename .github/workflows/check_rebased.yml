@@ -1,6 +1,5 @@
 name: Check branch is rebased
 on:
-  merge_group:
   pull_request:
     branches:
       - main
