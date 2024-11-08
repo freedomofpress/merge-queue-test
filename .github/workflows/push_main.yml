@@ -1,0 +1,11 @@
+name: Push in main
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  push-in-main:
+    runs-on: ubuntu-latest
+    steps:
+      - run: true

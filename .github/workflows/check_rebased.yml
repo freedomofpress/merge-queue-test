@@ -4,6 +4,12 @@ on:
   pull_request:
     branches:
       - main
+  workflow_run:
+    workflows: [Push in main]
+    types:
+      - completed
+    branches:
+      - main
 
 jobs:
   check-rebased:
