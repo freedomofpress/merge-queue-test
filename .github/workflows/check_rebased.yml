@@ -6,10 +6,10 @@ on:
       - main
   workflow_run:
     workflows: [Push in main]
-    types:
-      - completed
-    branches:
-      - main
+    #types:
+    #  - completed
+    #branches:
+    #  - main
 
 jobs:
   check-rebased:
