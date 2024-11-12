@@ -1,0 +1,27 @@
+name: Sign and rebase
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: write
+
+jobs:
+  rebase:
+    env:
+      GH_TOKEN: ${{ github.token  }}
+    name: Sign and rebase
+    runs-on: ubuntu-latest
+    if: >-
+      github.event.issue.pull_request != '' &&
+      (
+        contains(github.event.comment.body, '/sign-and-rebase') ||
+        contains(github.event.comment.body, '/autosquash')
+      )
+    steps:
+      - name: Checkout the latest code
+        uses: actions/checkout@v4
+      - name: Sign and rebase
+        run: |
+          git rebase -s --autosquash origin/main
+          git push -f
