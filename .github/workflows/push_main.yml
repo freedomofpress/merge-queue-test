@@ -4,12 +4,22 @@ on:
     branches:
       - main
 
+permissions:
+  issues: write
+  actions: write
+
 jobs:
   push-in-main:
+    env:
+      GH_TOKEN: ${{ github.token  }}
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          PR_BRANCHES=$(gh pr list --base main --json 'headRefName' --jq .[].headRefName)
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Bump stale branches
+        run: |
+          PR_BRANCHES=$(gh pr list --base main --json "headRefName" --jq .[].headRefName)
           for BRANCH in $PR_BRANCHES; do
-              RUN=$(gh run list --branch $BRANCH -w "Check branch is rebased" --json databaseId)
+              RUN=$(gh run list --branch $BRANCH -w "Check branch is rebased" --json databaseId --jq .[0].databaseId)
               gh run rerun $RUN
+          done
