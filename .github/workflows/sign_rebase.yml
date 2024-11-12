@@ -23,5 +23,6 @@ jobs:
         uses: actions/checkout@v4
       - name: Sign and rebase
         run: |
+          gh pr checkout ${{ github.event.issue.number  }}
           git rebase -s --autosquash origin/main
           git push -f
