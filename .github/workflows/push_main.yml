@@ -8,4 +8,8 @@ jobs:
   push-in-main:
     runs-on: ubuntu-latest
     steps:
-      - run: true
+      - run: |
+          PR_BRANCHES=$(gh pr list --base main --json 'headRefName' --jq .[].headRefName)
+          for BRANCH in $PR_BRANCHES; do
+              RUN=$(gh run list --branch $BRANCH -w "Check branch is rebased" --json databaseId)
+              gh run rerun $RUN
